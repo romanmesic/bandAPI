@@ -29,15 +29,18 @@ namespace BandAPI.Controllers
         public IActionResult GetBands()
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands();
-            return new JsonResult(bandsFromRepo);
+            return Ok(bandsFromRepo);
         
         }
 
         [HttpGet("{bandId}")]
         public IActionResult GetBand(Guid bandId)
         {
+            
             var bandFromRepo = _bandAlbumRepository.GetBand(bandId);
-            return new JsonResult(bandFromRepo);
+            if (bandFromRepo == null)
+                return NotFound();
+            return Ok(bandFromRepo);
 
 
         }
