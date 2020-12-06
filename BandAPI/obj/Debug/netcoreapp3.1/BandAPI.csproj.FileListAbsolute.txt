@@ -34,8 +34,10 @@ D:\Nova mapa\BandAPI\BandAPI\bin\Debug\netcoreapp3.1\BandAPI.dll
 D:\Nova mapa\BandAPI\BandAPI\bin\Debug\netcoreapp3.1\BandAPI.pdb
 D:\Nova mapa\BandAPI\BandAPI\bin\Debug\netcoreapp3.1\Npgsql.dll
 D:\Nova mapa\BandAPI\BandAPI\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.csproj.CoreCompileInputs.cache
-D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.dll
 D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.pdb
 D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.genruntimeconfig.cache
+D:\Nova mapa\BandAPI\BandAPI\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\Nova mapa\BandAPI\BandAPI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.csproj.CoreCompileInputs.cache
+D:\Nova mapa\BandAPI\BandAPI\obj\Debug\netcoreapp3.1\BandAPI.MvcApplicationPartsAssemblyInfo.cache
