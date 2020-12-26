@@ -33,18 +33,18 @@ namespace BandAPI.Controllers
         
         [HttpGet]
         [HttpHead]
-        public ActionResult<IEnumerable<BandDto>> GetBands([FromQuery]string mainGenre, [FromQuery] string searchQuery)
+        public ActionResult<IEnumerable<BandDto>> GetBands([FromQuery] BandsResourceParameters bandsResourceParameters)
         {
 
             //throw new Exception("testing exceptions");
-            var bandsFromRepo = _bandAlbumRepository.GetBands(mainGenre, searchQuery);
+            var bandsFromRepo = _bandAlbumRepository.GetBands(bandsResourceParameters);
           
             
             return Ok(_mapper.Map<IEnumerable<BandDto>>(bandsFromRepo));
         
         }
 
-        [HttpGet("{bandId}")]
+        [HttpGet("{bandId}", Name ="GetBand")]
         public IActionResult GetBand(Guid bandId)
         {
             
@@ -52,6 +52,21 @@ namespace BandAPI.Controllers
             if (bandFromRepo == null)
                 return NotFound();
             return Ok(bandFromRepo);
+
+
+        }
+
+        [HttpPost]
+
+        public ActionResult<BandDto> CreateBand([FromBody] BandForCreatingDto band)
+        {
+            var bandEntity = _mapper.Map<Entities.Band>(band);
+            _bandAlbumRepository.AddBand(bandEntity);
+            _bandAlbumRepository.Save();
+
+            var bandToReturn = _mapper.Map<BandDto>(bandEntity);
+
+            return CreatedAtRoute("GetBand", new { bandId = bandToReturn.Id }, bandToReturn);
 
 
         }
