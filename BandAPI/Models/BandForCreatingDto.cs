@@ -19,6 +19,8 @@ namespace BandAPI.Models
 
         public string MainGenre { get; set; }
 
+        public ICollection<AlbumForCreatingDto> Albums { get; set; } = new List<AlbumForCreatingDto>();
+
 
     }
 }
