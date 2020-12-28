@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BandAPI.Models;
 using BandAPI.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,62 @@ namespace BandAPI.Controllers
         
         
         
+        }
+
+
+        [HttpPut("{albumId}")]
+
+        public ActionResult UpdateAlbumForBand(Guid bandId, Guid albumId, [FromBody] AlbumForUpdatingDto album)
+
+        {
+            if (!_bandAlbumRepository.BandExists(bandId))
+                return NotFound();
+
+            var albumFromRepo = _bandAlbumRepository.GetAlbum(bandId,albumId);
+
+            if (albumFromRepo == null)
+                return NotFound();
+
+            _mapper.Map(album, albumFromRepo);
+            _bandAlbumRepository.UpdateAlbum(albumFromRepo);
+            _bandAlbumRepository.Save();
+
+
+            return NoContent();
+
+        
+            
+        
+        
+        }
+
+        [HttpPatch("{albumId}")]
+
+        public ActionResult PartiallyUpdateAlbumForBand(Guid bandId, Guid albumId, [FromBody]JsonPatchDocument<AlbumForUpdatingDto> patchDocument)
+
+        {
+
+            if (!_bandAlbumRepository.BandExists(bandId))
+                return NotFound();
+
+            var albumFromRepo = _bandAlbumRepository.GetAlbum(bandId, albumId);
+
+            if (albumFromRepo == null)
+                return NotFound();
+
+            var albumToPatch = _mapper.Map<AlbumForUpdatingDto>(albumFromRepo);
+            patchDocument.ApplyTo(albumToPatch, ModelState);
+
+            if (!TryValidateModel(albumToPatch))
+                return ValidationProblem(ModelState);
+
+            _mapper.Map(albumToPatch, albumFromRepo);
+            _bandAlbumRepository.UpdateAlbum(albumFromRepo);
+            _bandAlbumRepository.Save();
+
+            return NoContent();
+
+
         }
 
 
