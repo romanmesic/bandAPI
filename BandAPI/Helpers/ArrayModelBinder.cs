@@ -35,6 +35,14 @@ namespace BandAPI.Helpers
 
             var values = value.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(x => converter.ConvertFromString(x.Trim())).ToArray();
+
+            var typeValues = Array.CreateInstance(elementType, values.Length);
+            values.CopyTo(typeValues, 0);
+            bindingContext.Model = typeValues;
+
+            bindingContext.Result = ModelBindingResult.Success(bindingContext.Model);
+
+            return Task.CompletedTask;
         }
     }
 }
