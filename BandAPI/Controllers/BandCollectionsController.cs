@@ -27,6 +27,18 @@ namespace BandAPI.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
+
+        [HttpGet("({ids})")]
+        public IActionResult GetBandCollection([FromRoute]IEnumerable<Guid> ids)
+
+        { 
+        
+        
+        
+        
+        }
+
+
         [HttpPost]
 
         public ActionResult<IEnumerable<BandDto>> CreateBandCollection([FromBody] IEnumerable<BandForCreatingDto> bandCollection)
@@ -47,12 +59,7 @@ namespace BandAPI.Controllers
         }
         [HttpOptions]
 
-        public IActionResult GetBandsOptions()
-        {
-            Response.Headers.Add("Allow", "GET,POST,DELETE,HEAD,OPTIONS");
-            return Ok();
-        
-        }
+     
 
 
     }
