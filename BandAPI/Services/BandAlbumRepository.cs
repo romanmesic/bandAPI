@@ -112,16 +112,12 @@ namespace BandAPI.Services
                                  .OrderBy(b => b.Name).ToList();
         }
 
-        public IEnumerable<Band> GetBands(BandsResourceParameters bandsResourceParameters)
+        public PagedList<Band> GetBands(BandsResourceParameters bandsResourceParameters)
 
         {
 
             if (bandsResourceParameters == null)
                 throw new ArgumentNullException(nameof(bandsResourceParameters));
-
-            //if (string.IsNullOrWhiteSpace(bandsResourceParameters.MainGenre) && string.IsNullOrWhiteSpace(bandsResourceParameters.SearchQuery))
-
-            //    return GetBands();
 
             var collection = _context.Bands as IQueryable<Band>;
 
@@ -145,11 +141,8 @@ namespace BandAPI.Services
 
 
 
-            
-            return collection
-                .Skip(bandsResourceParameters.PageSize * (bandsResourceParameters.PageNumber - 1))
-                .Take(bandsResourceParameters.PageSize)
-                .ToList();
+
+            return PagedList<Band>.Create(collection, bandsResourceParameters.PageNumber, bandsResourceParameters.PageSize);
 
         
         
